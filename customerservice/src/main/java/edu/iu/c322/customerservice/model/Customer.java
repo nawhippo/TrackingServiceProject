@@ -1,5 +1,9 @@
 package edu.iu.c322.customerservice.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,7 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotEmpty(message = "name cannot be empty.")
     private String name;

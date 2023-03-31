@@ -1,7 +1,6 @@
-package edu.iu.c322.customerservice.Repository;
+package edu.iu.c322.orderservice.Repository;
 
-import edu.iu.c322.customerservice.model.Customer;
-import org.springframework.stereotype.Repository;
+import edu.iu.c322.orderservice.model.Customer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class InMemoryCustomerRepository {
         throw new IllegalStateException("customer id is not valid");
     }
     }
-    private Customer getCustomerbyId(int id){
+    public Customer getCustomerbyId(int id){
         return customers.stream().filter(x -> x.getId() == id).findAny().orElse(null);
     }
 }

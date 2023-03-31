@@ -1,4 +1,4 @@
-package edu.iu.c322.customerservice.model;
+package edu.iu.c322.orderservice.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,17 +8,22 @@ import jakarta.validation.constraints.NotEmpty;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Customer {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotEmpty(message = "name cannot be empty.")
     private String name;
     private String email;
+
+    public ArrayList<Order> orders;
 
     public int getId() {
         return id;
@@ -32,6 +37,9 @@ public class Customer {
         return name;
     }
 
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
     public void setName(String name) {
         this.name = name;
     }

@@ -1,8 +1,7 @@
-package edu.iu.c322.customerservice.Repository;
+package edu.iu.c322.orderservice.Repository;
 
-import edu.iu.c322.customerservice.model.Customer;
+import edu.iu.c322.orderservice.model.Customer;
 
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package edu.iu.c322.customerservice.handler;
+package edu.iu.c322.orderservice.handler;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

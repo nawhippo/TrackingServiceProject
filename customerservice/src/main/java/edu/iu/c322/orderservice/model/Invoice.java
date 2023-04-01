@@ -23,8 +23,8 @@ public class Invoice{
         this.order = order;
         this.date = date;
         double sum = 0;
-        for(int i = 0; i < items.length; i++){
-            sum = sum + order.getItems()[i].getPrice() * order.getItems()[i].getQuantity();
+        for(int i = 0; i < items.size(); i++){
+            sum = sum + order.getItems().get(i).getPrice() * order.getItems().get(i).getQuantity();
         }
         this.total = sum;
         this.items = order.getItems();
@@ -34,7 +34,7 @@ public class Invoice{
     }
     private String date;
 private double total;
-private Item[] items;
+private ArrayList<Item> items;
 
 private PaymentMethod paymentMethod;
 private Address address;

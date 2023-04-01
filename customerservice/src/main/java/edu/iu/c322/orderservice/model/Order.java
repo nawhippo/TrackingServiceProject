@@ -7,12 +7,19 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import org.aspectj.apache.bcel.classfile.InnerClass;
 
+import java.util.ArrayList;
+
 public class Order {
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    ArrayList<Item> item;
     public Invoice getInvoice() {
         return invoice;
     }
 
-    public Order(@NotEmpty(message = "item list cannot be empty") Item[] items) {
+    public Order(@NotEmpty(message = "item list cannot be empty") ArrayList<Item> items) {
 
         this.items = items;
     }
@@ -21,12 +28,9 @@ public class Order {
 
     }
 
-    public Item[] getItems() {
-        return items;
-    }
 
     Invoice invoice;
-    public Order(String city, String state, int customerid, @NotEmpty Item[] items, int postalcode, String currentdate) {
+    public Order(String city, String state, int customerid, @NotEmpty ArrayList<Item> items, int postalcode, String currentdate) {
         this.items = items;
         this.address = new Address(state,city,postalcode);
         this.customerid = customerid;
@@ -38,7 +42,7 @@ public class Order {
     private int postalcode;
 
     @NotEmpty(message = "item list cannot be empty")
-    private Item[] items;
+    private ArrayList<Item> items;
     private Address address;
 
     //autogenerate

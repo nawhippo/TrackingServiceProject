@@ -3,6 +3,16 @@ package edu.iu.c322.orderservice.model;
 import jakarta.validation.constraints.NotEmpty;
 
 public class Item {
+    public Tracking getTracking() {
+        return tracking;
+    }
+
+    Tracking tracking;
+    public String getStatus() {
+        return status;
+    }
+
+    String status;
     public String getName() {
         return name;
     }

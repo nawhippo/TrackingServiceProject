@@ -3,6 +3,7 @@ package edu.iu.c322.orderservice.controller;
 import edu.iu.c322.orderservice.Repository.CustomerRepository;
 import edu.iu.c322.orderservice.Repository.InMemoryCustomerRepository;
 import edu.iu.c322.orderservice.model.Customer;
+import edu.iu.c322.orderservice.model.Invoice;
 import edu.iu.c322.orderservice.model.Item;
 import edu.iu.c322.orderservice.model.Order;
 import jakarta.validation.Valid;
@@ -22,61 +23,27 @@ public class CustomerController {
         this.repository = repository;
     }
 
-
-
-    //ORDER COMMANDS
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/orders/return")
-    public void returnOrderItem(@PathVariable int id, @RequestBody Order order, @RequestBody int itemid, @RequestBody String reason) {
+    //INVOICE COMMANDS
+    @ResponseStatus(HttpStatus.CREATED)
+    @GetMapping("/invoices/{orderId}")
+    public Invoice findInvoice(@PathVariable int id, int orderid) {
         InMemoryCustomerRepository myrepo = (InMemoryCustomerRepository) repository;
-        myrepo.getCustomerbyId(id).getOrders().get(id);
+        return myrepo.getCustomerbyId(id).getOrders().get(orderid).getInvoice();
     }
+
 
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/orders/{orderId}")
-    public void cancelOrder(@PathVariable int id, @PathVariable int orderId) {
-        InMemoryCustomerRepository repository1 = (InMemoryCustomerRepository) repository;
-        repository1.getCustomerbyId(id).getOrders().remove(orderId);
-    }
-
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/orders}")
-    public int create(@Valid @RequestBody Customer customer,String state, String city, int postalcode, Item[] items){
-        Order order = new Order(city,state, customer.getId(),postalcode);
-        customer.orders.add(order);
-        return order.getOrderid();
-    }
-
-
-
-
-    @GetMapping
-    public List<Customer> findAll(){
-
-        return repository.findAll();
-    }
-
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public int create(@Valid @RequestBody Customer customer){
-        Customer newCustomer = repository.save(customer);
-        return newCustomer.getId();
-    }
-
-    //Put localhost:800/customers/2
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/{id}")
-    public void update(@Valid @RequestBody Customer customer, @PathVariable int id){
-        customer.setId(id);
-        repository.save(customer);
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id){
-        Customer customer = new Customer();
-        customer.setId(id);
-        repository.delete(customer);
+    @PutMapping("/invoices/{orderId}")
+    public void updateShippingstatus(@PathVariable int id, @RequestBody String status) {
+        InMemoryCustomerRepository myrepo = (InMemoryCustomerRepository) repository;
+        myrepo.getCustomerbyId(id).getOrders().get(id).getInvoice().setShippingStatus(status);
     }
 }
+
+
+
+
+
+
+
